@@ -25,15 +25,15 @@ import {getRetryConfig} from './retry';
 const URL = isBrowser() ? window.URL : url.URL;
 
 // tslint:disable-next-line variable-name no-any
-let HttpsProxyAgent: any;
+let ProxyAgent: any;
 
 // Figure out if we should be using a proxy. Only if it's required, load
-// the https-proxy-agent module as it adds startup cost.
+// the proxy-agent module as it adds startup cost.
 function loadProxy() {
   const proxy = process.env.HTTPS_PROXY || process.env.https_proxy ||
       process.env.HTTP_PROXY || process.env.http_proxy;
   if (proxy) {
-    HttpsProxyAgent = require('https-proxy-agent');
+    ProxyAgent = require('proxy-agent');
   }
   return proxy;
 }
@@ -171,7 +171,7 @@ export class Gaxios {
       if (this.agentCache.has(proxy)) {
         opts.agent = this.agentCache.get(proxy);
       } else {
-        opts.agent = new HttpsProxyAgent(proxy);
+        opts.agent = new ProxyAgent(proxy);
         this.agentCache.set(proxy, opts.agent!);
       }
     }

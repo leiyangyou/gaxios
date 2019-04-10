@@ -39,7 +39,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /node_modules\/https-proxy-agent\//,
+        test: /node_modules\/proxy-agent\//,
         use: 'null-loader'
       },
       {

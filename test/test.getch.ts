@@ -17,7 +17,7 @@ import * as sinon from 'sinon';
 import * as stream from 'stream';
 const assertRejects = require('assert-rejects');
 // tslint:disable-next-line variable-name
-const HttpsProxyAgent = require('https-proxy-agent');
+const ProxyAgent = require('proxy-agent');
 import {Gaxios, GaxiosError, request, GaxiosOptions, GaxiosResponse} from '../src';
 import * as qs from 'querystring';
 import * as fs from 'fs';
@@ -199,7 +199,7 @@ describe('🥁 configuration options', () => {
     const res = await request({url});
     scope.done();
     assert.deepStrictEqual(res.data, body);
-    assert.ok(res.config.agent instanceof HttpsProxyAgent);
+    assert.ok(res.config.agent instanceof ProxyAgent);
   });
 
   it('should load the proxy from the cache', async () => {
